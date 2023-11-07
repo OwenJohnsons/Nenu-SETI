@@ -16,6 +16,7 @@ for line in file_list:
     trgt = line.split('/')[-1].split('_')[1][0:-4]
     target_name = np.append(target_name, trgt)
 
+print('Number of files on SETIBK: ', len(target_name))
 # drop duplicates
 target_name = np.unique(target_name)
 # np.savetxt('target-names.txt', target_name, fmt='%s')
@@ -39,3 +40,4 @@ for target in loaded_targets:
 df = pd.DataFrame({'Target': loaded_targets, 'Main_ID': main_ids, 'RA': ra_arr, 'DEC': dec_arr})
 print(df.head())
 df.to_csv('csv/target-info.csv', index=False)
+# %%
