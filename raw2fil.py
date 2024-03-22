@@ -364,8 +364,14 @@ def main():
                         output_file.write(np.zeros((nRes)).astype(np.uint32))
                     else:
                         input_files[k].seek(int(4*nRes*nIdx))
-                        output_file.write(input_files[k].read(int(4*nRes)))
+                        data_to_write = input_files[k].read(int(4*nRes))
+                        output_file.write(data_to_write)
+                        if verbose: 
+                            log_print(f"Writing {len(data_to_write)} bytes")
                 nIdx += 1
+
+            log_print(f"Output filterbank size {output_file.tell()/(1024**3)} Gb")
+            output_file.close()    
                 
             for nBeam in range(numfiles):
                 input_files[nBeam].close();
